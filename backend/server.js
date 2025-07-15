@@ -15,7 +15,13 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: [
+    'https://employee-management-system-7a29nldwj.vercel.app/', // your Vercel production URL
+    'http://localhost:5173' // for local development, optional
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 // MongoDB Connection
