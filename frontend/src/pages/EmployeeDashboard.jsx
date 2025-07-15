@@ -6,6 +6,7 @@ import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import AnnouncementIcon from '@mui/icons-material/Announcement';
 import { motion } from 'framer-motion';
+import api from '../services/api';
 
 export default function EmployeeDashboard() {
   const { user } = useAuth();
@@ -14,7 +15,7 @@ export default function EmployeeDashboard() {
 
   useEffect(() => {
     const fetchProfile = async () => {
-      const res = await axios.get('http://localhost:5000/api/employees/profile/me', {
+      const res = await api.get('/employees/profile/me', {
         headers: { Authorization: `Bearer ${user.token}` },
       });
       setProfile(res.data);

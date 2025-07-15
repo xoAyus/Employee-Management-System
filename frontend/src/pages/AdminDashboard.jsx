@@ -5,6 +5,7 @@ import { Card, CardContent, Typography, Box, Grid, Paper } from '@mui/material';
 import PeopleIcon from '@mui/icons-material/People';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import { motion } from 'framer-motion';
+import api from '../services/api';
 
 export default function AdminDashboard() {
   const { user } = useAuth();
@@ -14,10 +15,10 @@ export default function AdminDashboard() {
   useEffect(() => {
     const fetchCounts = async () => {
       const [empRes, leaveRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/employees/dashboard/employee-count', {
+        api.get('/employees/dashboard/employee-count', {
           headers: { Authorization: `Bearer ${user.token}` },
         }),
-        axios.get('http://localhost:5000/api/leave/dashboard/pending-leave-count', {
+        api.get('/leave/dashboard/pending-leave-count', {
           headers: { Authorization: `Bearer ${user.token}` },
         }),
       ]);
