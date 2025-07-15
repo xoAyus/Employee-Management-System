@@ -16,10 +16,21 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: [
-    'https://employee-management-system-7a29nldwj.vercel.app', // your Vercel production URL
-    'http://localhost:5173' // for local development, optional
-  ],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps, curl, Postman)
+    if (!origin) return callback(null, true);
+
+    // Allow localhost for local dev
+    if (origin === 'http://localhost:5173') return callback(null, true);
+
+    // Allow all Vercel preview and production deployments
+    if (/^https:\/\/employee-management-system-.*\.vercel\.app$/.test(origin)) {
+      return callback(null, true);
+    }
+
+    // Otherwise, block
+    return callback(new Error('Not allowed by CORS'));
+  },
   credentials: true
 }));
 app.use(express.json());
