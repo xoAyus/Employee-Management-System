@@ -52,7 +52,7 @@ API is deployed at:
 ![Leave Management](screenshots/leave-management.png)
 
 ### Announcements
-![Announcements](screenshots/Announcements.png)
+![Announcements](screenshots/announcements.png)
 
 ## 🧑‍💻 Local Development
 
